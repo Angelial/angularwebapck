@@ -32,7 +32,6 @@ module.exports = {
     entry: {
         app: ['babel-polyfill', path.resolve(__dirname, 'www/app/app.js')],
         vendor: ['angular', 'angular-ui-router', 'oclazyload'],
-        // vendor2: ['es5-shim', 'es5-shim/es5-sham']
     },
     //文件导出的配置
     output: {
@@ -72,7 +71,8 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin({
             name : "vendor",
             chunks: "script/vendor.js"
-        })
+        }),
+        // new webpack.HotModuleReplacementPlugin()
         // new webpack.optimize.UglifyJsPlugin({
         //     compress: {
         //         properties: false,
@@ -88,5 +88,10 @@ module.exports = {
         //     },
         //     sourceMap: false
         // })
-    ]
+    ],
+    // devServer: {
+    //     contentBase: path.join(__dirname, "build"),
+    //     compress: true,
+    //     port: 9000
+    // }
 };
