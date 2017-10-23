@@ -30,6 +30,7 @@
 console.log(134);
 
 module.exports = angular.module('app.home', []).config(["$stateProvider",function($stateProvider) {
+    'ngInject';
     $stateProvider.state('home', {
         url: '/home',
         templateProvider: function($q) {

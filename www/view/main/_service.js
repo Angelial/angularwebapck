@@ -1,5 +1,6 @@
 'use strict';
 module.exports = angular.module('app.main', []).config(["$stateProvider",function($stateProvider) {
+    'ngInject'
     $stateProvider.state('main', {
         url: '/main',
         templateProvider: function($q) {

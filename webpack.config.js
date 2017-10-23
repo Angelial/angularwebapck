@@ -1,24 +1,17 @@
 var webpack = require("webpack");
 var es3ifyPlugin = require('es3ify-webpack-plugin');
-var HtmlWebpackPlugin = require("html-webpack-plugin"),
-    path = require('path'),
-    buildPath = path.resolve(__dirname, "build"), //发布目录
-    publicPath = '', //资源引用统一前缀
-    devtool = '', //source-map模式
-    CleanWebpackPlugin = require("clean-webpack-plugin"),
-    __DEV__ = process.env.NODE_ENV === 'dev', //发布环境
-    plugins = [
-        new HtmlWebpackPlugin({
-            chunks: ['app', 'vendor'],
-            template: __dirname + '/www/template/index.html',
-            filename: './index.html'
-        }),
-        new HtmlWebpackPlugin({
-            chunks: ['app', 'vendor'],
-            template: __dirname + '/www/template/mobile.html',
-            filename: './mobile.html'
-        }),
-    ];
+var HtmlWebpackPlugin = require("html-webpack-plugin");
+var path = require('path');
+var buildPath = path.resolve(__dirname, "build"); //发布目录
+var publicPath = ''; //资源引用统一前缀
+var devtool = ''; //source-map模式
+var CleanWebpackPlugin = require("clean-webpack-plugin");
+var __DEV__ = process.env.NODE_ENV === 'dev'; //发布环境
+
+var webpackDevServer = require("webpack-dev-server");
+
+// config.entry.app.unshift("webpack-dev-server/client?http://localhost:8080/");
+
 
 if (!__DEV__) {
     //压缩
@@ -36,9 +29,9 @@ module.exports = {
     //文件导出的配置
     output: {
         path: buildPath,
-        filename: "script/[name].js",
+        filename: "script/[name][hash].js",
         // publicPath: publicPath,
-        chunkFilename: "chunks/[name].chunk.js"
+        chunkFilename: "chunks/[name].chunk[hash].js"
     },
     module: {
         loaders: [{
@@ -47,18 +40,13 @@ module.exports = {
         }, {
             test: /\.js$/,
             exclude: /node_modules/,
-            use: {
-                loader:"babel-loader",
-                options:{
-                    presets: ["env", "es2015-loose"]
-                }
-            }
+            loader:"babel-loader",
         },{
             test: /\.js$/,
-            exclude: /node_modules/,
             loader: "es3ify-loader"
         }]
     },
+
     plugins: [
         new HtmlWebpackPlugin({
             title: "angular-webpack",
@@ -70,28 +58,16 @@ module.exports = {
         new es3ifyPlugin(),
         new webpack.optimize.CommonsChunkPlugin({
             name : "vendor",
-            chunks: "script/vendor.js"
+            chunks: "script/vendor[hash].js"
         }),
-        // new webpack.HotModuleReplacementPlugin()
-        // new webpack.optimize.UglifyJsPlugin({
-        //     compress: {
-        //         properties: false,
-        //         warnings: false
-        //     },
-        //     output: {
-        //         keep_quited_props: true,
-        //         beautify: true,
-        //         quote_keys: true
-        //     },
-        //     mangle: {
-        //         screw_ie8: false
-        //     },
-        //     sourceMap: false
-        // })
+        new webpack.HotModuleReplacementPlugin(),
     ],
-    // devServer: {
-    //     contentBase: path.join(__dirname, "build"),
-    //     compress: true,
-    //     port: 9000
-    // }
+    devServer: {
+        contentBase: buildPath,
+        hot: true,
+        inline: true,
+        stats: 'errors-only',
+        progress: true,
+        port: 3200
+    },
 };
