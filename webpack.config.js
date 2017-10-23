@@ -1,4 +1,5 @@
 var webpack = require("webpack");
+var es3ifyPlugin = require('es3ify-webpack-plugin');
 var HtmlWebpackPlugin = require("html-webpack-plugin"),
     path = require('path'),
     buildPath = path.resolve(__dirname, "build"), //发布目录
@@ -55,6 +56,7 @@ module.exports = {
             }
         },{
             test: /\.js$/,
+            exclude: /node_modules/,
             loader: "es3ify-loader"
         }]
     },
@@ -66,6 +68,7 @@ module.exports = {
             inject: true
         }),
         new CleanWebpackPlugin(["build"]),
+        new es3ifyPlugin(),
         new webpack.optimize.CommonsChunkPlugin({
             name : "vendor",
             chunks: "script/vendor.js"
