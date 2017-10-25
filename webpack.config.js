@@ -6,19 +6,8 @@ var HtmlWebpackPlugin = require("html-webpack-plugin"),
     publicPath = '', //资源引用统一前缀
     devtool = '', //source-map模式
     CleanWebpackPlugin = require("clean-webpack-plugin"),
-    __DEV__ = process.env.NODE_ENV === 'dev', //发布环境
-    plugins = [
-        new HtmlWebpackPlugin({
-            chunks: ['app', 'vendor'],
-            template: __dirname + '/www/template/index.html',
-            filename: './index.html'
-        }),
-        new HtmlWebpackPlugin({
-            chunks: ['app', 'vendor'],
-            template: __dirname + '/www/template/mobile.html',
-            filename: './mobile.html'
-        }),
-    ];
+    __DEV__ = process.env.NODE_ENV === 'dev'; //发布环境
+
 
 if (!__DEV__) {
     //压缩
@@ -36,9 +25,9 @@ module.exports = {
     //文件导出的配置
     output: {
         path: buildPath,
-        filename: "script/[name].js",
+        filename: "script/[name][hash:4].js",
         // publicPath: publicPath,
-        chunkFilename: "chunks/[name].chunk.js"
+        chunkFilename: "chunks/[name].chunk[hash:4].js"
     },
     module: {
         loaders: [{
@@ -70,28 +59,25 @@ module.exports = {
         new es3ifyPlugin(),
         new webpack.optimize.CommonsChunkPlugin({
             name : "vendor",
-            chunks: "script/vendor.js"
+            chunks: "script/vendor[hash:4].js"
         }),
-        // new webpack.HotModuleReplacementPlugin()
-        // new webpack.optimize.UglifyJsPlugin({
-        //     compress: {
-        //         properties: false,
-        //         warnings: false
-        //     },
-        //     output: {
-        //         keep_quited_props: true,
-        //         beautify: true,
-        //         quote_keys: true
-        //     },
-        //     mangle: {
-        //         screw_ie8: false
-        //     },
-        //     sourceMap: false
-        // })
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                properties: false,
+                warnings: false
+            },
+            output: {
+                quote_keys: true
+            },
+            mangle: {
+                screw_ie8: false
+            },
+            sourceMap: false
+        })
     ],
-    // devServer: {
-    //     contentBase: path.join(__dirname, "build"),
-    //     compress: true,
-    //     port: 9000
-    // }
+    devServer: {
+        contentBase: path.join(__dirname, "build"),
+        port: 9000
+    }
 };

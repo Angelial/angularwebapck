@@ -2,18 +2,18 @@
 module.exports = angular.module('app.main', []).config(["$stateProvider",function($stateProvider) {
     $stateProvider.state('main', {
         url: '/main',
-        templateProvider: function($q) {
+        templateProvider: ['$q',function($q) {
             var deferred = $q.defer();
             require.ensure(['./main.html'], function(require) {
                 var template = require('./main.html');
                 deferred.resolve(template);
             }, 'main-tpl');
             return deferred.promise;
-        },
+        }],
         controller: 'mainCtrl',
         controllerAs: 'vm',
         resolve: {
-            'app.main': function($q, $ocLazyLoad) {
+            'app.main': ['$q', '$ocLazyLoad',function($q, $ocLazyLoad) {
                 var deferred = $q.defer();
                 require.ensure(['./main.js'], function() {
                     var mod = require('./main.js');
@@ -23,7 +23,7 @@ module.exports = angular.module('app.main', []).config(["$stateProvider",functio
                     deferred.resolve(mod.controller);
                 }, 'main-ctl');
                 return deferred.promise;
-            }
+            }]
         }
     });
 }]).name;
