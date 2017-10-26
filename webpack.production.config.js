@@ -6,16 +6,17 @@ var buildPath = path.resolve(__dirname, "build"); //发布目录
 var publicPath = ''; //资源引用统一前缀
 var devtool = ''; //source-map模式
 var CleanWebpackPlugin = require("clean-webpack-plugin");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 
-var    __DEV__ = process.env.NODE_ENV === 'build'; //发布环境
+// var    __DEV__ = process.env.NODE_ENV === 'dev'; //发布环境
 
-if (!__DEV__) {
-    //压缩
-
-    // publicPath = "ngwebpack/build/";
-    devtool = 'source-map';
-}
+// if (!__DEV__) {
+//     //压缩
+//
+//     // publicPath = "ngwebpack/build/";
+//     devtool = 'source-map';
+// }
 
 module.exports = {
     //入口文件配置
@@ -47,7 +48,7 @@ module.exports = {
             test: /\.js$/,
             exclude: /node_modules/,
             loader: "es3ify-loader"
-        }, {
+        },{
             test: /\.css$/,
             use: [{
                 loader: "style-loader"
@@ -70,10 +71,24 @@ module.exports = {
         }),
         new CleanWebpackPlugin(["build/script"]),
         new es3ifyPlugin(),
-        new webpack.HotModuleReplacementPlugin()
-    ],
-    devServer: {
-        contentBase: path.join(__dirname, "build"),
-        port: 9000
-    }
+        new webpack.optimize.CommonsChunkPlugin({
+            name : "vendor",
+            chunks: "script/vendor[hash:4].js"
+        }),
+        // new webpack.HotModuleReplacementPlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                properties: false,
+                warnings: false
+            },
+            output: {
+                quote_keys: true
+            },
+            mangle: {
+                screw_ie8: false
+            },
+            sourceMap: false
+        }),
+        new ExtractTextPlugin("build/css/style.css")
+    ]
 };
