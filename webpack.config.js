@@ -70,10 +70,6 @@ module.exports = {
         }),
         new CleanWebpackPlugin(["build/script"]),
         new es3ifyPlugin(),
-        new webpack.optimize.CommonsChunkPlugin({
-            name : "vendor",
-            chunks: "script/vendor[hash:4].js"
-        }),
         new webpack.HotModuleReplacementPlugin()
     ],
     devServer: {
