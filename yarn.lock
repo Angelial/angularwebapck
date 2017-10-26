@@ -69,7 +69,7 @@ angular-ui-router@^0.4.3:
   dependencies:
     angular "^1.0.8"
 
-angular@1.2:
+angular@1.2.32:
   version "1.2.32"
   resolved "https://registry.npmjs.org/angular/-/angular-1.2.32.tgz#df52625a5167919931418dda3a9208b9f5fa3db4"
 
