@@ -6,7 +6,7 @@ var buildPath = path.resolve(__dirname, "build"); //发布目录
 var publicPath = ''; //资源引用统一前缀
 var devtool = ''; //source-map模式
 var CleanWebpackPlugin = require("clean-webpack-plugin");
-
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var    __DEV__ = process.env.NODE_ENV === 'build'; //发布环境
 
@@ -68,9 +68,14 @@ module.exports = {
             filename: './index.html',
             inject: true
         }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name : "vendor",
+            chunks: "script/vendor[hash:4].js"
+        }),
         new CleanWebpackPlugin(["build/script"]),
         new es3ifyPlugin(),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new ExtractTextPlugin("build/style/style.css")
     ],
     devServer: {
         contentBase: path.join(__dirname, "build"),
