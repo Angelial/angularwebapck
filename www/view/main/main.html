@@ -1,3 +1,8 @@
 
 <div>Helllo 我是main页</div>
 <a ui-sref="home">去home页</a>
+
+<div>
+    <div alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</div>
+    <button class='btn btn-default' ng-click="addAlert()">Add Alert</button>
+</div>

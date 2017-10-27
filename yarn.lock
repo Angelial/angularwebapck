@@ -72,6 +72,10 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.npmjs.org/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
+angular-bootstrap@^0.12.2:
+  version "0.12.2"
+  resolved "https://registry.npmjs.org/angular-bootstrap/-/angular-bootstrap-0.12.2.tgz#de9900a7db087a7e9da47304a9c2f77f9c069827"
+
 angular-cache@^4.6.0:
   version "4.6.0"
   resolved "https://registry.npmjs.org/angular-cache/-/angular-cache-4.6.0.tgz#5cc90ad1273fb150205dc1c71b8141ae39e48bff"

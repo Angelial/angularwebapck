@@ -7,7 +7,7 @@ module.exports = angular.module('app.main', []).config(["$stateProvider",functio
             require.ensure(['./main.html'], function(require) {
                 var template = require('./main.html');
                 deferred.resolve(template);
-            }, 'main-tpl');
+            }, 'main/main-tpl');
             return deferred.promise;
         }],
         controller: 'mainCtrl',
@@ -21,7 +21,7 @@ module.exports = angular.module('app.main', []).config(["$stateProvider",functio
                         name: 'app.main'
                     });
                     deferred.resolve(mod.controller);
-                }, 'main-ctl');
+                }, 'main/main-ctl');
                 return deferred.promise;
             }]
         }

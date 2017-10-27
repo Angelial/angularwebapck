@@ -10,7 +10,7 @@ module.exports = angular.module('app.home', []).config(["$stateProvider",functio
             require.ensure(['./home.html'], function(require) {
                 var template = require('./home.html');
                 deferred.resolve(template);
-            }, 'home-tpl');
+            }, 'home/home-tpl');
             return deferred.promise;
         }],
         controller: 'homeCtrl',
@@ -24,7 +24,7 @@ module.exports = angular.module('app.home', []).config(["$stateProvider",functio
                         name: 'app.home'
                     });
                     deferred.resolve(mod.controller);
-                }, 'home-ctl');
+                }, 'home/home-ctl');
                 return deferred.promise;
             }]
         }
