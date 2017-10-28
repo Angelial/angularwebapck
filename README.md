@@ -1,4 +1,7 @@
-####angular+webpack+bootstrap 兼容IE8浏览器
+使用angular和webpack搭建兼容IE8的环境：
+
+
+angular+webpack+bootstrap 兼容IE8浏览器
 
 1. es6在低版本浏览器上不支持，为了能够在低版本上使用es6，就需要通过babel把es6的代码转换成es5代码：
 
@@ -100,8 +103,6 @@ webpack.config.js配置：
             },
             sourceMap: false
         })
-
-到这里IE低版本浏览器在webpack里兼容基本算是结束了。
 
 
 3.2 这里还涉及到一个angular压缩的问题：

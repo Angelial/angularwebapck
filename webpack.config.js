@@ -8,16 +8,8 @@ var devtool = ''; //source-map模式
 var CleanWebpackPlugin = require("clean-webpack-plugin");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-var    __DEV__ = process.env.NODE_ENV === 'build'; //发布环境
-
-if (!__DEV__) {
-    //压缩
-
-    // publicPath = "ngwebpack/build/";
-    devtool = 'source-map';
-}
-
 module.exports = {
+    devtool : 'source-map',
     //入口文件配置
     entry: {
         app: ['babel-polyfill', path.resolve(__dirname, 'www/app/app.js')],

@@ -9,14 +9,7 @@ var CleanWebpackPlugin = require("clean-webpack-plugin");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 
-// var    __DEV__ = process.env.NODE_ENV === 'dev'; //发布环境
 
-// if (!__DEV__) {
-//     //压缩
-//
-//     // publicPath = "ngwebpack/build/";
-//     devtool = 'source-map';
-// }
 
 module.exports = {
     //入口文件配置
