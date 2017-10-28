@@ -12,7 +12,7 @@ angularjs1.2：angularjs1.3及其以上不在支持IE8，在此只能选择angul
 
 bootstrap2.X：bootstrap3.0及其以上不在支持IE8，在此只能选择bootstrap2.X(只使用bootstrap的样式)
 
-angular-bootstrap0.12.X：能够支持angular1.2.X 和bootstrap2.x
+angular-ui-bootstrap0.12.X：能够支持angular1.2.X 和bootstrap2.x
 
 webpack版本号3.8.1 -- 当前最新版本  截止2017-10-28
 
@@ -98,8 +98,8 @@ webpack.config.js配置：
             ]
         }
         
-    
-执行压缩之后，会发现IE低版本浏览器又报错，很明显UglifyJS需要配置一些参数来支持IE低版本的浏览器：
+
+执行压缩之后，会发现IE低版本浏览器又报错，知道问题出在UglifyJS压缩上，查看文档发现UglifyJS需要配置一些参数来支持IE低版本浏览器：
 
         new webpack.optimize.UglifyJSPlugin({
             compress: {
@@ -122,7 +122,7 @@ webpack.config.js配置：
         })
 
 
-3.2 这里还涉及到一个angular压缩的问题：
+3.2 这里还涉及到一个AngularJS压缩的问题：
 
         app.controller("ctrl", function($scope){
             ......
@@ -215,10 +215,13 @@ AngularJS可以通过`restrict`来设置指令的调用方式
     C 作为类名使用
     M 作为注释使用
 
-经测试IE8中可以使用`A 作为属性使用` 也就是写成 `<div myele></div>`方式可以兼容IE8。
+经测试IE8中可以使用`A 作为属性使用` 也就是写成 `<div myele></div>`方式可以兼容IE8(类名和注释的使用未测试，可行性暂时不知)。
 
-> 在angular-bootstrap中有些是通过自定义指令`<元素名></元素名>`的方式调用，这时就可以修改成`<div 属性名></div>`的方式兼容IE8
+  在angular-ui-bootstrap中有些是通过自定义指令`<元素名></元素名>`的方式调用，
+  这时就可以修改成`<div 属性名></div>`的方式兼容IE8
   
+
+到此已经基本上把IE8兼容问题解决，现在可以开始愉快的开发了。
 
 ### 其他配置
 
