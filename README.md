@@ -1,12 +1,14 @@
 ## 初学 angular+webpack+bootstrap环境搭建
 
-第一次接触webpack，同时也是第一次搭建webpack的环境，记录下这次搭建webpack踩过的坑，以便之后翻阅查看。
-以下都是自己在搭建的过程中碰到的问题，在网上查到的资料，在此总结如下：
-
+第一次接触webpack，同时也是第一次搭建webpack的环境。
+在网上查阅各种资料，终于完成了一个简单的webpack的配置并能兼容IE8，
+以下都是自己在搭建的过程中碰到的问题，现总结如下：
 
 项目需要兼容低版本的浏览器，最低支持到IE8，选择包的版本时需要选择能够兼容IE8的版本。
 
-包的版本号选择：
+包管理器选择使用 [yarn](http://yarnpkg.cn/zh-Hans/)
+
+### 包的版本号选择：
 
 angularjs1.2：angularjs1.3及其以上不在支持IE8，在此只能选择angularjs1.2
 
@@ -222,7 +224,3 @@ AngularJS可以通过`restrict`来设置指令的调用方式
   
 
 到此已经基本上把IE8兼容问题解决，现在可以开始愉快的开发了。
-
-### 其他配置
-
-1. HtmlWebpackPlugin

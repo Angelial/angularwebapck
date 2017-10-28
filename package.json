@@ -6,8 +6,9 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack --display-error-details",
+    "start:ie8": "webpack --config webpack.ie8.config.js --display-error-details",
     "start:dev": "webpack-dev-server --open",
-    "build": "set NODE_ENV=production && webpack --progress --colors --config webpack.production.config.js"
+    "build": "cross-env NODE_ENV=production webpack --config webpack.production.config.js"
   },
   "dependencies": {
     "angular": "1.2.32",
@@ -30,6 +31,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-es2015-loose": "^8.0.0",
     "clean-webpack-plugin": "^0.1.17",
+    "cross-env": "^5.1.1",
     "css-loader": "^0.28.7",
     "es3ify-loader": "^0.2.0",
     "es3ify-webpack-plugin": "^0.0.1",
