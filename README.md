@@ -1,4 +1,4 @@
-## 初学 angular+webpack+bootstrap环境搭建
+##  angular+webpack+bootstrap环境搭建
 
 第一次接触webpack，同时也是第一次搭建webpack的环境。
 在网上查阅各种资料，终于完成了一个简单的webpack的配置并能兼容IE8，
@@ -224,3 +224,5 @@ AngularJS可以通过`restrict`来设置指令的调用方式
   
 
 到此已经基本上把IE8兼容问题解决，现在可以开始愉快的开发了。
+
+

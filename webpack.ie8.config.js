@@ -18,9 +18,9 @@ module.exports = {
     //文件导出的配置
     output: {
         path: buildPath,
-        filename: "script/[name][hash:4].js",
+        filename: "script/[name].[hash:6].js",
         // publicPath: publicPath,
-        chunkFilename: "script/chunks/[name].chunk[hash:4].js"
+        chunkFilename: "script/chunks/[name].chunk.[hash:6].js"
     },
     module: {
         loaders: [{
@@ -36,16 +36,10 @@ module.exports = {
             loader: "es3ify-loader"
         }, {
             test: /\.css$/,
-            use: [{
-                loader: "style-loader"
-            },{
-                loader: "css-loader",
-                options: {
-                    modules: true
-                }
-            },{
-                loader: "postcss-loader"
-            }]
+            use:  ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: "css-loader"
+                })
         }]
     },
     plugins: [
@@ -61,6 +55,7 @@ module.exports = {
         }),
         new CleanWebpackPlugin(["build/script"]),
         new es3ifyPlugin(),
-        new ExtractTextPlugin("build/style/style.css")
+        new ExtractTextPlugin("style/style.[hash:6].css"),
+        require('autoprefixer')
     ]
 };

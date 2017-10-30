@@ -1,5 +1,4 @@
 'use strict';
-console.log(134);
 
 module.exports = angular.module('app.home', []).config(["$stateProvider",function($stateProvider) {
     $stateProvider.state('home', {

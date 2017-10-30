@@ -2,9 +2,13 @@
 // require('../../node_modules/font-awesome/css/font-awesome.min.css');
 var Promise = require('es6-promise').polyfill();
 
+
 if (!window.Promise) {
     window.Promise = Promise;
 }
+
+var style = require("./index.css");
+
 var angular = require("angular");
 
 

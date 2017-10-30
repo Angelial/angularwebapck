@@ -36,16 +36,10 @@ module.exports = {
             loader: "es3ify-loader"
         }, {
             test: /\.css$/,
-            use: [{
-                loader: "style-loader"
-            },{
-                loader: "css-loader",
-                options: {
-                    modules: true
-                }
-            },{
-                loader: "postcss-loader"
-            }]
+            use:  ExtractTextPlugin.extract({
+                fallback: "style-loader",
+                use: "css-loader"
+            })
         }]
     },
     plugins: [
@@ -62,7 +56,7 @@ module.exports = {
         new CleanWebpackPlugin(["build/script"]),
         new es3ifyPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        new ExtractTextPlugin("build/style/style.css")
+        new ExtractTextPlugin("style/style.css")
     ],
     devServer: {
         contentBase: path.join(__dirname, "build"),
